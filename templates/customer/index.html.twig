@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer index{% endblock %}
+
+{% block body %}
+    <h1>Listes de clients</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Numéro de téléphone</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td style="padding: 25px;">{{ customer.name }}</td>
+                <td style="padding: 25px;">{{ customer.email }}</td>
+                <td style="padding: 25px;">{{ customer.phoneNumber }}</td>
+                
+                
+                <td>
+                    <a href="{{ path('app_customer_show', {'id': customer.id}) }}">show</a>
+                    <a href="{{ path('app_customer_edit', {'id': customer.id}) }}">edit</a>
+                    <a href="{{ asset('qrcodes/customer_' ~ customer.id ~ '.pdf') }}" download>PDF</a>
+                    <a href="{{ path('app_parcours_new', {'customerId': customer.id}) }}">Create</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_customer_new') }}">Create new</a>
+{% endblock %}

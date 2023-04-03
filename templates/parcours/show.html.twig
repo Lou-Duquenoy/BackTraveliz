@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer{% endblock %}
+
+{% block body %}
+    <h1>Parcours</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ parcours.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ parcours.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ parcours.description}}</td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td>{{ parcours.destination }}</td>
+            </tr>
+            <tr>
+                <th>Origin</th>
+                <td>{{ parcours.reservation }}</td>
+            </tr>
+            <tr>
+                <th>Terminal</th>
+                <td>{{ parcours.terminal }}</td>
+            </tr>
+            <tr>
+                <th>Checking time</th>
+                <td>{{ parcours.activite }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="{{ path('app_parcours_index') }}">back to list</a>
+
+    <a href="{{ path('app_parcours_edit', {'id': parcours.id}) }}">edit</a>
+
+    
+{% endblock %}
