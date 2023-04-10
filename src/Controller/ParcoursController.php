@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Snappy\Pdf;
 use Endroid\QrCode\Color\Color;
@@ -25,6 +26,7 @@ use Endroid\QrCode\Label\Label;
 use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Label\Font\NotoSans;
+
 
 #[Route('/parcours')]
 class ParcoursController extends AbstractController
@@ -49,13 +51,30 @@ class ParcoursController extends AbstractController
         ]);
     }
     #[Route('/new/{customerId}', name: 'app_parcours_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,int $customerId, ParcoursRepository $parcoursRepository, CustomerRepository $customerRepository): Response
+    public function new(Request $request, int $customerId, ParcoursRepository $parcoursRepository, CustomerRepository $customerRepository): Response
     {
         $parcours = new Parcours();
         $form = $this->createForm(ParcoursType::class, $parcours);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Use the Geocoding API to get the coordinates for the destination
+            $destination = $parcours->getDestination();
+            $apiKey = 'AIzaSyAwPxt4Oi9wvbubOMcVmxpJY6DoNPMbvpo'; // Replace with your Google Cloud API key
+            $client = HttpClient::create();
+            $response = $client->request('GET', "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($destination)."&key=$apiKey");
+            $data = $response->toArray();
+            
+            if (isset($data['results'][0]['geometry']['location'])) {
+                $coordinates = $data['results'][0]['geometry']['location'];
+                $latitude = $coordinates['lat'];
+                $longitude = $coordinates['lng'];
+                $parcours->setLatitude($latitude);
+                $parcours->setLongitude($longitude);
+            } else {
+                $this->addFlash('error', 'Failed to get coordinates for destination');
+            }
+
             $customer = $customerRepository->find($customerId);
             if (!$customer) {
                 throw $this->createNotFoundException('The customer does not exist');

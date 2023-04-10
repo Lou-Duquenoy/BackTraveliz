@@ -16,8 +16,15 @@ class ParcoursType extends AbstractType
             ->add('description')
             ->add('destination')
             ->add('origin')
+            ->add('gare_depart')
+            ->add('gare_arrivee')
+            ->add('aeroport_depart')
+            ->add('aeroport_arrivee')
             ->add('terminal')
             ->add('checkin_time')
+            ->add('date_depart')
+            ->add('date_arrivee')
+            ->add('date_retour')
         ;
     }
 

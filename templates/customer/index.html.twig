@@ -3,12 +3,15 @@
 {% block title %}Customer index{% endblock %}
 
 {% block body %}
+    <div class="buttonParcours">
+        <a href="{{ path('app_customer_new') }}">Ajouter un voyageur</a>
+    </div>
     <h1>Listes de clients</h1>
-
+       
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Email</th>
                 <th>Numéro de téléphone</th>
                
@@ -17,16 +20,28 @@
         <tbody>
         {% for customer in customers %}
             <tr>
-                <td style="padding: 25px;">{{ customer.name }}</td>
-                <td style="padding: 25px;">{{ customer.email }}</td>
-                <td style="padding: 25px;">{{ customer.phoneNumber }}</td>
+                <td style="padding: 25px 8rem 25px 25px;">{{ customer.prenom}} {{customer.nom}}</td>
+                <td style="padding: 25px 6rem 25px 25px;">{{ customer.email }}
+               <td style="padding: 25px 6rem 25px 25px;">{{ customer.telephone }}</td>
                 
                 
                 <td>
-                    <a href="{{ path('app_customer_show', {'id': customer.id}) }}">show</a>
-                    <a href="{{ path('app_customer_edit', {'id': customer.id}) }}">edit</a>
-                    <a href="{{ asset('qrcodes/customer_' ~ customer.id ~ '.pdf') }}" download>PDF</a>
-                    <a href="{{ path('app_parcours_new', {'customerId': customer.id}) }}">Create</a>
+                    <div class="dropdown">
+                        <img src="{{ asset('images/barre.svg') }}" alt="Menu">
+                        <div class="dropdown-content">
+                            <div class"show">
+                            <a href="{{ path('app_customer_show', {'id': customer.id}) }}">Afficher</a>
+                            </div>
+                            <div class="edit">
+                            <a href="{{ path('app_customer_edit', {'id': customer.id}) }}">Modifier</a>
+                            </div>
+                            <div class="create">
+                            {# <a href="{{ asset('qrcodes/customer_' ~ customer.id ~ '.pdf') }}" download>PDF</a> #}
+                            <a href="{{ path('app_parcours_new', {'customerId': customer.id}) }}">Créer un voyage</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </td>
             </tr>
         {% else %}
@@ -36,6 +51,34 @@
         {% endfor %}
         </tbody>
     </table>
+     <script>
+    // Get all the dropdown containers
+    var dropdowns = document.querySelectorAll('.dropdown');
 
-    <a href="{{ path('app_customer_new') }}">Create new</a>
+    // Loop through the dropdown containers
+    dropdowns.forEach(function(dropdown) {
+        // Get the dropdown content
+        var dropdownContent = dropdown.querySelector('.dropdown-content');
+
+        // Add a click event listener to the image
+        dropdown.querySelector('img').addEventListener('click', function() {
+            // Toggle the visibility of the dropdown content
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+
+        // Hide the dropdown content if the user clicks outside of it
+        window.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target)) {
+                dropdownContent.style.display = "none";
+            }
+        });
+    });
+</script>
+    
+    
+   
 {% endblock %}

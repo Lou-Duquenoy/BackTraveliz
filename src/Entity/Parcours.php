@@ -23,19 +23,44 @@ class Parcours
     #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
 
-   
-
     #[ORM\Column(length: 255)]
     private ?string $destination = null;
 
     #[ORM\Column(length: 255)]
     private ?string $origin = null;
+    
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $gareDepart = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $gareArrivee = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $aeroportDepart = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $aeroportArrivee = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $checkinTime = null;
+    
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $dateDepart = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $dateArrivee = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $dateRetour = null;
 
     #[ORM\Column(length: 255)]
     private ?string $terminal = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $checkinTime = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?float $latitude = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?float $longitude = null;
 
     public function getId(): ?int
     {
@@ -78,6 +103,18 @@ class Parcours
         return $this;
     }
 
+    public function getDestination(): ?string
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(string $destination): self
+    {
+        $this->destination = $destination;
+
+        return $this;
+    }
+
     public function getOrigin(): ?string
     {
         return $this->origin;
@@ -90,14 +127,84 @@ class Parcours
         return $this;
     }
 
-    public function getDestination(): ?string
+    public function getGareDepart(): ?string
     {
-        return $this->destination;
+        return $this->gareDepart;
     }
 
-    public function setDestination(string $destination): self
+    public function setGareDepart(string $gareDepart): self
     {
-        $this->destination = $destination;
+        $this->gareDepart = $gareDepart;
+
+        return $this;
+    }
+
+    public function getGareArrivee(): ?string
+    {
+        return $this->gareArrivee;
+    }
+
+    public function setGareArrivee(string $gareArrivee): self
+    {
+        $this->gareArrivee = $gareArrivee;
+
+        return $this;
+    }
+
+    public function getAeroportDepart(): ?string
+    {
+        return $this->aeroportDepart;
+    }
+
+    public function setAeroportDepart(string $aeroportDepart): self
+    {
+        $this->aeroportDepart = $aeroportDepart;
+
+        return $this;
+    }
+
+    public function getAeroportArrivee(): ?string
+    {
+        return $this->aeroportArrivee;
+    }
+
+    public function setAeroportArrivee(string $aeroportArrivee): self
+    {
+        $this->aeroportArrivee = $aeroportArrivee;
+
+        return $this;
+    }
+
+    public function getDateDepart(): ?string
+    {
+        return $this->dateDepart;
+    }
+
+    public function setDateDepart(string $dateDepart): self
+    {
+        $this->dateDepart = $dateDepart;
+
+        return $this;
+    }
+    public function getDateArrivee(): ?string
+    {
+        return $this->dateArrivee;
+    }
+
+    public function setDateArrivee(string $dateArrivee): self
+    {
+        $this->dateArrivee = $dateArrivee;
+
+        return $this;
+    }
+    public function getDateRetour(): ?string
+    {
+        return $this->dateRetour;
+    }
+
+    public function setDateRetour(string $dateRetour): self
+    {
+        $this->dateRetour = $dateRetour;
 
         return $this;
     }
@@ -125,4 +232,28 @@ class Parcours
 
         return $this;
     }
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
 }

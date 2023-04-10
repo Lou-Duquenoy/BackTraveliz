@@ -28,7 +28,7 @@ class AuthController extends AbstractController
     public function login(Request $request): JsonResponse
     {   
         $data = json_decode($request->getContent(), true);
-        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['name' => $data['name']]);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $data['email']]);
 
         if (!$customer) {
         return new JsonResponse(['status' => 'error', 'message' => 'Invalid credentials'], 401);
@@ -42,7 +42,7 @@ class AuthController extends AbstractController
     public function setPassword(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['name' => $data['name']]);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $data['email']]);
         
         if (!$customer) {
             return new JsonResponse(['status' => 'error', 'message' => 'Customer not found'], 404);
@@ -54,11 +54,11 @@ class AuthController extends AbstractController
         return new JsonResponse(['status' => 'success', 'message' => 'Password saved']);
     }
     /**
-     * @Route("/parcours/{name}", name="parcours", methods={"GET"})
+     * @Route("/parcours/{email}", name="parcours", methods={"GET"})
      */
-    public function getParcoursByCustomerName($name): JsonResponse
+    public function getParcoursByCustomerName($email): JsonResponse
     {
-        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['name' => $name]);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $email]);
 
         if (!$customer) {
             return new JsonResponse(['status' => 'error', 'message' => 'Customer not found'], 404);
@@ -73,7 +73,37 @@ class AuthController extends AbstractController
         return new JsonResponse([
             'status' => 'success',
             'origin' => $parcours->getOrigin(),
+            'gareDepart' => $parcours->getGareDepart(),
+            'gareArrivee' => $parcours->getGareArrivee(),
             'destination' => $parcours->getDestination(),
+            'checkinTime' => $parcours->getCheckinTime(),
+            'dateDepart' => $parcours->getDateDepart(),
+            'latitude' => $parcours->getLatitude(),
+            'longitude' => $parcours->getLongitude(),
+        ]);
+    }
+    /**
+     * @Route("/authenticate", name="authenticate", methods={"POST"})
+     */
+    public function authenticate(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $data['email']]);
+
+        if (!$customer) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid credentials'], 401);
+        }
+
+        if (!password_verify($data['password'], $customer->getPassword())) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid credentials'], 401);
+        }
+
+        
+
+        return new JsonResponse([
+            'status' => 'success',
+            'message' => 'Authenticated successfully',
+            
         ]);
     }
     

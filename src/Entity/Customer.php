@@ -16,22 +16,25 @@ class Customer
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $phoneNumber = null;
+    private ?string $telephone = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $reservation = null;
+    /* #[ORM\Column(length: 255)]
+    private ?string $reservation = null; */
 
-    #[ORM\Column(length: 255)]
-    private ?string $activite = null;
+   /*  #[ORM\Column(length: 255)]
+    private ?string $activite = null; */
 
     #[ORM\Column(length: 255)]
     private ?string $token = null;
@@ -45,32 +48,45 @@ class Customer
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getprenom(): ?string
     {
-        return $this->name;
+        return $this->prenom;
     }
 
-    public function setName(string $name): self
+    public function setprenom(string $prenom): self
     {
-        $this->name = $name;
+        $this->prenom = $prenom;
 
         return $this;
     }
+    public function getnom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setnom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+    
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
     public function setPassword(string $password): self
-    {
-        $this->password = $password;
+{
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $this->password = $hashedPassword;
 
-        return $this;
-    }
+    return $this;
+}
 
     public function getEmail(): ?string
     {
-        return $this->reservation;
+        return $this->email;
     }
 
     public function setEmail(string $email): self
@@ -80,20 +96,20 @@ class Customer
         return $this;
     }
 
-    public function getphoneNumber(): ?string
+    public function gettelephone(): ?string
     {
-        return $this->phoneNumber;
+        return $this->telephone;
     }
 
-    public function setphoneNumber(string $phoneNumber): self
+    public function settelephone(string $telephone): self
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->telephone = $telephone;
 
         return $this;
     }
     
     
-    public function getReservation(): ?string
+   /*  public function getReservation(): ?string
     {
         return $this->reservation;
     }
@@ -103,11 +119,11 @@ class Customer
         $this->reservation = $reservation;
 
         return $this;
-    }
+    } */
 
     
 
-    public function getActivite(): ?string
+    /* public function getActivite(): ?string
     {
         return $this->activite;
     }
@@ -117,7 +133,7 @@ class Customer
         $this->activite = $activite;
 
         return $this;
-    }
+    } */
 
     public function getToken(): ?string
     {
