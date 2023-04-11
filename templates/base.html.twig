@@ -5,9 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-Rwm2G0M/eNIk9HUrUGJx25gqhbItw8KvJ30fI+mpjpA7TFrKd8kMY7Cy2yF+0y7mBzJYwE09V7zRfJQsV7T8yw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         {% endblock %}
 
         {% block javascripts %}
@@ -20,12 +22,12 @@
             <img class="logo" src="{{ asset('images/logo.svg') }}" alt="Logo">
             <ul>
             <li><img src="{{ asset('images/Category.svg')}}"/><p>Dashboard</p></li>
-            <li><img src="{{ asset('images/Chart.svg')}}"/><p>Voyageurs</p></li>
+            <li class="select"><img src="{{ asset('images/Chart.svg')}}"/><p>Voyageurs</p></li>
             <li><img src="{{ asset('images/Category.svg')}}"/><p>Paramètres</p></li>
             
         </nav>
          <div class="sidebar-right">
-           
+
         </div>
         <div class="content">
             {% block body %}{% endblock %}

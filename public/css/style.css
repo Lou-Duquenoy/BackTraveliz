@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
 body {
   background: #f7f7f8;
 }
 .buttonParcours {
   display: flex;
-
   margin-top: 30px;
   padding-left: 61%;
 }
 .buttonParcours a {
-  background: #605bff;
+  background: #00CDBD;
   border-radius: 10px;
   display: flex;
   padding: 0.8rem 1.3rem;
   text-decoration: none;
   color: white;
+  font-family: 'Nunito';
 }
 nav {
   position: fixed;
@@ -25,20 +27,60 @@ nav {
   padding-top: 3rem;
   padding-right: 4rem;
   color: white;
+  font-family: 'Nunito';
 }
 .sidebar-right {
   position: fixed;
   top: 0;
   right: 0;
-  background: white;
   height: 100%;
-  width: 15%;
-  padding: 30px;
+  width: 18%;
   z-index: 1;
+  border-radius: 10px;
+  background: white;
+}
+.sidebar-right-top {
+  background-color: #00786f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.sidebar-right-top img {
+  width: 4.3rem;
+  border-radius: 40px;
+  background-color: white;
+}
+.sidebar-right-top p {
+  color: white;
+  font-family: 'Nunito';
+}
+.sidebar-right-bottom {
+  background: white;
+    padding-left: 1.5rem;
+    padding-top: 1rem;
+}
+.sidebar-right-bottom p {
+  margin: 0;
+  padding-bottom: 1rem;
+}
+.steps {
+  background: #f5fbfc;
+  border-radius: 10px;
+  padding-left: 0.8rem;
+}
+.steps p{
+  font-family: 'Roboto';
 }
 
 .content {
   margin-left: 18rem;
+}
+.content p,.content h1{
+  font-family: 'Nunito';
 }
 ul {
   padding: 0;
@@ -68,12 +110,18 @@ ul li {
 th {
   padding-left: 21px;
   text-align: left;
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'Nunito';
+  
 }
+
 table {
   border-collapse: collapse;
 }
 td {
   background-color: white;
+  padding-right: 20px;
 }
 .dropdown {
   position: relative;
@@ -85,19 +133,19 @@ td {
   position: absolute;
   z-index: 1;
   background-color: #fff;
-  padding: 10px;
+  padding: 10px 22px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  left:70%;
-  width: 110px;
-  
+  left: 70%;
 }
-
-.dropdown-content a{
+.select p {
+  color: #00cdbd;
+}
+.dropdown-content a {
   text-decoration: none;
 }
 
- .dropdown-content {
+.dropdown-content {
   display: block;
 }
 .table {
@@ -107,35 +155,42 @@ td {
 .dropdown img {
   width: 20px;
   height: 20px;
+  position: relative;
   cursor: pointer;
 }
-.edit{
-  background: #5B93FF;
-  opacity: 0.03;
+.edit {
+  background: #f1f5fb;
   border-radius: 5px;
-
+  padding: 10px 22px;
+  display: flex;
+  margin-bottom: 0.5rem;
 }
-.edit a{
+
+.edit a {
   font-style: normal;
   font-weight: 400;
-  color: #5B93FF;
+  color: #5b93ff;
 }
-.show{
- background: #E71D36;
- opacity: 0.05;
- border-radius: 5px;
+.delete {
+  background: #fef4f6;
+  border-radius: 5px;
+  padding: 10px 22px;
+  display: flex;
+  margin-bottom: 0.5rem;
 }
-.show a {
- font-style: normal;
- font-weight: 400;
- font-size: 10px;
- line-height: 14px;
- color: #E71D36;
+.delete a {
+  font-style: normal;
+  font-weight: 400;
+  color: #e71d36;
+}
+.create{
+  background: #f1fffe;
+  border-radius: 5px;
+  padding: 10px 22px;
+  display: flex;
+  justify-content: center;
+}
 
-}
-.create a{
-  color: #E71D36;
-}
 .dropdown-content {
   display: none;
   /* other CSS styles */
