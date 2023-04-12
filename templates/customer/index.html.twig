@@ -19,7 +19,7 @@
         </thead>
         <tbody>
         {% for customer in customers %}
-            <tr data-customer="{{ customer.nom }} {{ customer.prenom }}">
+            <tr class="customer-row" data-customer="{{ customer.nom }} {{ customer.prenom }}"><br>
                 
                 <td style="padding: 25px 8rem 25px 25px;font-family: 'Nunito'">{{ customer.prenom}} {{customer.nom}}</td>
                 <td style="padding: 25px 6rem 25px 25px;font-family: 'Nunito'">{{ customer.email }}
@@ -49,6 +49,7 @@
                 
             </tr>
         {% else %}
+            
             <tr>
                 <td colspan="8">no records found</td>
             </tr>

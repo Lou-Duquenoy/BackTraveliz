@@ -77,7 +77,7 @@ nav {
 }
 
 .content {
-  margin-left: 18rem;
+  margin-left: 19rem;
 }
 .content p,.content h1{
   font-family: 'Nunito';
@@ -122,6 +122,7 @@ table {
 td {
   background-color: white;
   padding-right: 20px;
+  
 }
 .dropdown {
   position: relative;
@@ -198,4 +199,9 @@ td {
 
 .dropdown-content.show {
   display: block;
+}
+.customer-row {
+  border-bottom: 0.5rem solid #f7f7f8;
+  padding: 1rem;
+  
 }
